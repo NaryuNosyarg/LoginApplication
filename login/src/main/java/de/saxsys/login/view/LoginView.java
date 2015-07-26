@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 import de.saxsys.login.viewmodel.LoginViewModel;
 import de.saxsys.mvvmfx.FxmlView;
 import de.saxsys.mvvmfx.InjectViewModel;
+import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -28,10 +29,15 @@ public class LoginView implements FxmlView<LoginViewModel>, Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
-		BooleanBinding booleanBinding = usernameField.textProperty().isEqualTo("")
+		BooleanBinding booleanBinding = usernameField.textProperty().isEmpty()
 				.or(passwordField.textProperty().isEqualTo(""));
 
 		loginButton.disableProperty().bind(booleanBinding);
+
+//		loginButton.disableProperty().bind(
+//			    Bindings.isEmpty(usernameField.textProperty())
+//			    .or(Bindings.isEmpty(passwordField.textProperty())
+//			));
 	}
 
 }
